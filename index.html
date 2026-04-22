@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>极简记账</title>
+    <meta name="description" content="极简日常记账，即开即用">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+    <header role="banner">
+        <h1>极简记账</h1>
+    </header>
+
+    <main id="app" role="main">
+        <!-- aria-live 确保金额变动能被读屏器播报 -->
+        <section id="summary" aria-labelledby="summary-title" aria-live="polite">
+            <h2 id="summary-title" class="sr-only">本月汇总</h2>
+            <div class="summary-card">
+                <div class="summary-item">
+                    <span>本月支出</span>
+                    <strong id="total-expense">0.00</strong>
+                </div>
+                <div class="summary-item">
+                    <span>本月收入</span>
+                    <strong id="total-income">0.00</strong>
+                </div>
+            </div>
+        </section>
+
+        <section id="input-area" aria-labelledby="input-title">
+            <h2 id="input-title" class="sr-only">新增记录</h2>
+            <form id="record-form">
+                <div class="input-group main-input">
+                    <input type="number" id="amount" step="0.01" placeholder="0.00" aria-label="金额" required autofocus>
+                    <select id="type" aria-label="收支类型">
+                        <option value="expense">支出</option>
+                        <option value="income">收入</option>
+                    </select>
+                </div>
+
+                <div class="category-grid" role="radiogroup" aria-label="选择分类">
+                    <label class="category-item">
+                        <input type="radio" name="category" value="餐饮" checked>
+                        <span>餐饮</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="radio" name="category" value="交通">
+                        <span>交通</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="radio" name="category" value="购物">
+                        <span>购物</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="radio" name="category" value="居住">
+                        <span>居住</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="radio" name="category" value="娱乐">
+                        <span>娱乐</span>
+                    </label>
+                    <label class="category-item">
+                        <input type="radio" name="category" value="其他">
+                        <span>其他</span>
+                    </label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="remark" placeholder="备注（可选）" aria-label="备注">
+                </div>
+
+                <button type="submit" class="primary-btn">保存 (Enter)</button>
+            </form>
+        </section>
+
+        <section id="list-area" aria-labelledby="list-title">
+            <h2 id="list-title">本月明细</h2>
+            <div id="record-list" role="list">
+                <p class="empty-msg">暂无记录</p>
+            </div>
+        </section>
+
+        <section id="history-area">
+            <details id="history-accordion">
+                <summary>历史月份汇总</summary>
+                <div id="history-content"></div>
+            </details>
+        </section>
+    </main>
+
+    <script src="app.js" type="module"></script>
+</body>
+</html>
